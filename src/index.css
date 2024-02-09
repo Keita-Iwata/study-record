@@ -38,7 +38,7 @@ h1 {
 button {
   border-radius: 8px;
   border: 1px solid transparent;
-  padding: 0.6em 1.2em;
+  padding: 0.3em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
@@ -49,11 +49,47 @@ button {
 button:hover {
   border-color: #646cff;
 }
-button:focus,z
-button:focus-visible {
+button:focus,
+z button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+.input-container {
+  display: flex;
+  gap: 10px;
+  padding-bottom: 2rem;
+  position: relative;
+}
+
+.error-message {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transform: translateY(1rem);
+  color: red;
+}
+
+.check-container {
+  text-align: left;
+}
+
+.check-container__time {
+  display: inline-block;
+  width: 1.5rem;
+}
+
+.record-title{
+  text-align: left;
+}
+
+.study-list p {
+  text-align: left;
+}
+
+.added-time {
+  text-align: left;
+  font-weight: bold;
+}
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
@@ -63,6 +99,7 @@ button:focus-visible {
     color: #747bff;
   }
   button {
-    background-color: #f9f9f9;
+    background-color: #666666;
+    color: #fcfcfc;
   }
 }

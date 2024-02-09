@@ -36,42 +36,50 @@ export const StudyMemo = () => {
 
   return (
     <>
-      <div>
+      <div class="input-container">
         <input
+          class="study-contents"
           placeholder="学習内容"
           value={inputText}
           onChange={onChangeText}
         />
         <input
+          class="study-time"
           placeholder="学習時間"
           value={inputTime}
           onChange={onChangeTime}
         />
-        時間
+        <button onClick={onClickAdd}>登録</button>
+        <p class="error-message">{error}</p>
       </div>
-      <div>
+      <div class="check-container">
         <p>
           <span>入力されている学習内容：</span>
           <span>{inputText}</span>
         </p>
         <p>
           <span>入力されている学習時間：</span>
-          <span>{inputTime}時間</span>
+          <span>
+            <span class="check-container__time">{inputTime}</span>時間
+          </span>
         </p>
       </div>
-      <div>
-        <button onClick={onClickAdd}>登録</button>
-      </div>
-      <p>{error}</p>
-      <ul>
+      <h2 class="record-title">学習記録</h2>
+      <ul class="study-list">
         {records.map((record, index) => (
           <li key={index}>
-            <span>{record.title}:</span>
-            <span>{record.time}時間</span>
+            <p>
+              <span>学習内容：</span>
+              {record.title}
+            </p>
+            <p>
+              <span>学習時間：</span>
+              {record.time}時間
+            </p>
           </li>
         ))}
       </ul>
-      <p>
+      <p class="added-time">
         合計時間：{records.reduce((a, b) => parseInt(a) + parseInt(b.time), 0)}
         時間
       </p>
