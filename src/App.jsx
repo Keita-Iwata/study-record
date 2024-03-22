@@ -55,7 +55,7 @@ export const StudyMemo = () => {
           value={inputTime}
           onChange={onChangeTime}
         />
-        <button onClick={onClickAdd}>登録</button>
+        <button onClick={onClickAdd}>登録する</button>
         <p class="error-message">{error}</p>
       </div>
       <div class="check-container">
