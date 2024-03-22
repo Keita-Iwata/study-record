@@ -1,16 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
+import { GetAllTodos } from "../utilis/supabaseFunction";
 
 export const StudyMemo = () => {
-  // const records = [
-  //   { title: "勉強の記録1", time: 1 },
-  //   { title: "勉強の記録2", time: 3 },
-  //   { title: "勉強の記録3", time: 5 },
-  // ];
   const [inputText, setInputText] = useState("");
   const [inputTime, setInputTime] = useState("");
   const [records, setRecords] = useState([]);
   const [error, setError] = useState("");
+  const [todos, setTodos] = useState([]);
 
   const onChangeText = (event) => {
     setInputText(event.target.value);
@@ -18,6 +15,15 @@ export const StudyMemo = () => {
   const onChangeTime = (event) => {
     setInputTime(event.target.value);
   };
+
+  useEffect(() => {
+    const getTodos = async () => {
+      const todos = await GetAllTodos();
+      setTodos(todos);
+      // console.log(todos);
+    };
+    getTodos();
+  }, []);
 
   const onClickAdd = () => {
     if (inputText === "" || inputTime === "") {
