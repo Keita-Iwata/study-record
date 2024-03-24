@@ -20,10 +20,10 @@ export const StudyMemo = () => {
     const getTodos = async () => {
       const todos = await GetAllTodos();
       setTodos(todos);
-      // console.log(todos);
     };
     getTodos();
   }, []);
+  console.log(todos);
 
   const onClickAdd = () => {
     if (inputText === "" || inputTime === "") {
@@ -39,6 +39,7 @@ export const StudyMemo = () => {
     setInputTime("");
     setError("");
   };
+  console.log(records);
 
   return (
     <>
