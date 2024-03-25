@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import { GetAllTodos } from "../utilis/supabaseFunction";
+import { GetAllTodos, addTodo } from "../utilis/supabaseFunction";
 
 export const StudyMemo = () => {
   const [inputText, setInputText] = useState("");
@@ -8,6 +8,7 @@ export const StudyMemo = () => {
   const [records, setRecords] = useState([]);
   const [error, setError] = useState("");
   const [todos, setTodos] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const onChangeText = (event) => {
     setInputText(event.target.value);
@@ -18,28 +19,44 @@ export const StudyMemo = () => {
 
   useEffect(() => {
     const getTodos = async () => {
-      const todos = await GetAllTodos();
-      setTodos(todos);
+      try {
+        const todos = await GetAllTodos();
+        setTodos(todos);
+      } catch (error) {
+        console.error("データの取得に失敗しました", error);
+      } finally {
+        setLoading(false); // ロード完了後、ローディング状態をfalseに設定
+      }
     };
+
     getTodos();
   }, []);
   console.log(todos);
 
-  const onClickAdd = () => {
+  const onClickAdd = async () => {
     if (inputText === "" || inputTime === "") {
       return setError("入力されていない項目があります");
     }
-    console.log("PASS");
-    const newRecord = {
-      title: inputText,
-      time: inputTime,
-    };
-    setRecords([...records, newRecord]);
-    setInputText("");
-    setInputTime("");
-    setError("");
+    try {
+      const newRecord = {
+        title: inputText,
+        time: inputTime,
+      };
+      const insertedRecord = await addTodo(newRecord.title, newRecord.time); // Supabaseにデータを挿入
+      setTodos([...todos, insertedRecord[0]]); // 返されたデータでrecordsを更新
+      setInputText(""); // 入力フィールドをクリア
+      setInputTime(""); // 入力フィールドをクリア
+      setError(""); // エラーメッセージをクリア
+    } catch (error) {
+      console.error("データの登録に失敗しました", error);
+      setError("データの登録に失敗しました");
+    }
   };
-  console.log(records);
+  // console.log(records);
+
+  if (loading) {
+    return <div className="loading">ロード中...</div>; // ローディング中の表示
+  }
 
   return (
     <>
@@ -73,7 +90,7 @@ export const StudyMemo = () => {
       </div>
       <h2 class="record-title">学習記録</h2>
       <ul class="study-list">
-        {records.map((record, index) => (
+        {todos.map((record, index) => (
           <li key={index}>
             <p>
               <span>学習内容：</span>
@@ -87,7 +104,7 @@ export const StudyMemo = () => {
         ))}
       </ul>
       <p class="added-time">
-        合計時間：{records.reduce((a, b) => parseInt(a) + parseInt(b.time), 0)}
+        合計時間：{todos.reduce((a, b) => parseInt(a) + parseInt(b.time), 0)}
         時間
       </p>
     </>
