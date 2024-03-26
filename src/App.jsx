@@ -11,17 +11,6 @@ export const StudyMemo = () => {
   const [todos, setTodos] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyA_4EWRtAszsD22rTZokKW16gXzlnsG86Y",
-    authDomain: "study-record-1a649.firebaseapp.com",
-    projectId: "study-record-1a649",
-    storageBucket: "study-record-1a649.appspot.com",
-    messagingSenderId: "145457063541",
-    appId: "1:145457063541:web:38136edadaceb97a853a3c"
-  };
-
-  const app = initializeApp(firebaseConfig);
-
   const onChangeText = (event) => {
     setInputText(event.target.value);
   };
