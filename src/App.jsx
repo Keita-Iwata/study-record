@@ -1,14 +1,26 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import { GetAllTodos, addTodo } from "../utilis/supabaseFunction";
+import { GetAllTodos, addTodo, deleteTodo } from "../utilis/supabaseFunction";
+import { initializeApp } from "firebase/app";
 
 export const StudyMemo = () => {
   const [inputText, setInputText] = useState("");
   const [inputTime, setInputTime] = useState("");
-  const [records, setRecords] = useState([]);
+  // const [records, setRecords] = useState([]);
   const [error, setError] = useState("");
   const [todos, setTodos] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyA_4EWRtAszsD22rTZokKW16gXzlnsG86Y",
+    authDomain: "study-record-1a649.firebaseapp.com",
+    projectId: "study-record-1a649",
+    storageBucket: "study-record-1a649.appspot.com",
+    messagingSenderId: "145457063541",
+    appId: "1:145457063541:web:38136edadaceb97a853a3c"
+  };
+
+  const app = initializeApp(firebaseConfig);
 
   const onChangeText = (event) => {
     setInputText(event.target.value);
@@ -31,8 +43,7 @@ export const StudyMemo = () => {
 
     getTodos();
   }, []);
-  console.log(todos);
-
+  
   const onClickAdd = async () => {
     if (inputText === "" || inputTime === "") {
       return setError("入力されていない項目があります");
@@ -52,7 +63,18 @@ export const StudyMemo = () => {
       setError("データの登録に失敗しました");
     }
   };
-  // console.log(records);
+
+  const onClickDelete = async (id) => {
+    console.log(id);
+    try {
+      await deleteTodo(id);
+      // 削除後のtodosをセット
+      setTodos(todos.filter((todo) => todo.id !== id));
+    } catch (error) {
+      console.error("データの削除に失敗しました", error);
+      setError("データの削除に失敗しました");
+    }
+  };
 
   if (loading) {
     return <div className="loading">ロード中...</div>; // ローディング中の表示
@@ -93,6 +115,9 @@ export const StudyMemo = () => {
         {todos.map((record, index) => (
           <li key={index}>
             <p>
+              <span>投稿日：{record.created_at}</span>
+            </p>
+            <p>
               <span>学習内容：</span>
               {record.title}
             </p>
@@ -100,6 +125,7 @@ export const StudyMemo = () => {
               <span>学習時間：</span>
               {record.time}時間
             </p>
+            <button onClick={() => onClickDelete(record.id)}>削除する</button>
           </li>
         ))}
       </ul>
