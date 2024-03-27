@@ -4,7 +4,19 @@ on:
   workflow_dispatch:
 
 jobs:
-  say_hello:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - run: echo "Hello World!３"
+    - uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build the app
+      run: npm run build
