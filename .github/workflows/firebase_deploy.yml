@@ -38,6 +38,11 @@ jobs:
 
       - name: Build React App
         run: npm run build
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          FIREBASE_CLI_EXPERIMENTS: webframeworks
+          VITE_SUPABASE_URL: ${{secrets.VITE_SUPABASE_URL}}
+          VITE_SUPABASE_ANON_KEY: ${{secrets.VITE_SUPABASE_ANON_KEY}}
 
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
