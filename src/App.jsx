@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import React from "react";
 import { GetAllTodos, addTodo, deleteTodo } from "../utilis/supabaseFunction";
 import { initializeApp } from "firebase/app";
 
@@ -18,20 +19,20 @@ export const StudyMemo = () => {
     setInputTime(event.target.value);
   };
 
-  useEffect(() => {
-    const getTodos = async () => {
-      try {
-        const todos = await GetAllTodos();
-        setTodos(todos);
-      } catch (error) {
-        console.error("データの取得に失敗しました", error);
-      } finally {
-        setLoading(false); // ロード完了後、ローディング状態をfalseに設定
-      }
-    };
+useEffect(() => {
+  const getTodos = async () => {
+    try {
+      const todos = await GetAllTodos();
+      setTodos(todos);
+    } catch (error) {
+      console.error("データの取得に失敗しました", error);
+    } finally {
+      setLoading(false); // ロード完了後、ローディング状態をfalseに設定
+    }
+  };
 
-    getTodos();
-  }, []);
+  getTodos();
+}, []);
   
   const onClickAdd = async () => {
     if (inputText === "" || inputTime === "") {
@@ -71,23 +72,24 @@ export const StudyMemo = () => {
 
   return (
     <>
-      <div class="input-container">
+    <title data-testid="title">Hello Jest</title>
+      <div className="input-container">
         <input
-          class="study-contents"
+          className="study-contents"
           placeholder="学習内容"
           value={inputText}
           onChange={onChangeText}
         />
         <input
-          class="study-time"
+          className="study-time"
           placeholder="学習時間"
           value={inputTime}
           onChange={onChangeTime}
         />
         <button onClick={onClickAdd}>登録</button>
-        <p class="error-message">{error}</p>
+        <p className="error-message">{error}</p>
       </div>
-      <div class="check-container">
+      <div className="check-container">
         <p>
           <span>入力されている学習内容：</span>
           <span>{inputText}</span>
@@ -95,12 +97,12 @@ export const StudyMemo = () => {
         <p>
           <span>入力されている学習時間：</span>
           <span>
-            <span class="check-container__time">{inputTime}</span>時間
+            <span className="check-container__time">{inputTime}</span>時間
           </span>
         </p>
       </div>
-      <h2 class="record-title">学習記録</h2>
-      <ul class="study-list">
+      <h2 className="record-title">学習記録</h2>
+      <ul className="study-list">
         {todos.map((record, index) => (
           <li key={index}>
             <p>
@@ -118,7 +120,7 @@ export const StudyMemo = () => {
           </li>
         ))}
       </ul>
-      <p class="added-time">
+      <p className="added-time">
         合計時間：{todos.reduce((a, b) => parseInt(a) + parseInt(b.time), 0)}
         時間
       </p>
