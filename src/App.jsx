@@ -77,16 +77,18 @@ useEffect(() => {
         <input
           className="study-contents"
           placeholder="学習内容"
+          data-testid="content-input"
           value={inputText}
           onChange={onChangeText}
         />
         <input
           className="study-time"
           placeholder="学習時間"
+          data-testid="time-input"
           value={inputTime}
           onChange={onChangeTime}
         />
-        <button onClick={onClickAdd}>登録</button>
+        <button onClick={onClickAdd} data-testid="register-button">登録</button>
         <p className="error-message">{error}</p>
       </div>
       <div className="check-container">
@@ -102,9 +104,9 @@ useEffect(() => {
         </p>
       </div>
       <h2 className="record-title">学習記録</h2>
-      <ul className="study-list">
+      <ul className="study-list" data-testid="study-list">
         {todos.map((record, index) => (
-          <li key={index}>
+          <li key={index} data-testid="study-item">
             <p>
               <span>投稿日：{record.created_at}</span>
             </p>
