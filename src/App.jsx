@@ -89,7 +89,7 @@ useEffect(() => {
           onChange={onChangeTime}
         />
         <button onClick={onClickAdd} data-testid="register-button">登録</button>
-        <p className="error-message">{error}</p>
+        <p className="error-message" data-testid="error">{error}</p>
       </div>
       <div className="check-container">
         <p>
@@ -118,7 +118,7 @@ useEffect(() => {
               <span>学習時間：</span>
               {record.time}時間
             </p>
-            <button onClick={() => onClickDelete(record.id)}>削除する</button>
+            <button onClick={() => onClickDelete(record.id)} data-testid="delete-button">削除する</button>
           </li>
         ))}
       </ul>
