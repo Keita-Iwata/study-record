@@ -2,12 +2,12 @@
 
 # STUDY RECORD APPLICATION
 
-今までの学習記録用のアプリを作成しました。
-supabase、firebaseを利用することで、アプリを閉じても学習記録は蓄積されています。
+今までの学習記録用のアプリを作成しました。<br>
+Baasを使用しているのでアプリを閉じても学習記録は蓄積されます。
 
+## About Service
+学習内容・学習時間ともに入力されていないとエラーになります。<br>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-# sample-vite
-# study-record
-# study-record
+## 起動の仕方
+https://study-record-1a649.web.app/
+こちらからアプリが見られます！
