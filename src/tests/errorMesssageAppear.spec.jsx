@@ -15,7 +15,7 @@ test("display error message", async () => {
     target: { value: "新しいToDo" },
   });
   fireEvent.change(screen.getByTestId("time-input"), {
-    target: { value: "" },
+    target: { value: "`1" },
   });
   fireEvent.click(screen.getByTestId("register-button"));
 
