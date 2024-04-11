@@ -1,3 +1,4 @@
+<img src="https://github.com/Keita-Iwata/study-record/assets/140999272/fc093740-44f8-468d-af4f-334c7ed80506" style="width:100%;">
 # 学習記録アプリ
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
