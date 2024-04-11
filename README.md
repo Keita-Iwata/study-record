@@ -1,4 +1,4 @@
-# React + Vite
+# 学習記録アプリ
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
